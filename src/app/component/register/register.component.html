@@ -1,0 +1,130 @@
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-6">
+        <ng-lottie [options]="options"></ng-lottie>
+      </div>
+      <div class="col-6">
+        <h2 class="display-4 text-primary">Register</h2>
+        <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+          <div class="form-outline mb-3">
+            <label class="form-label" for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              name="person"
+              [(ngModel)]="UserName"
+              required
+              minlength="3"
+              maxlength="15"
+              #UserNamevalid="ngModel"
+              [ngClass]="
+                UserNamevalid.invalid &&
+                (UserNamevalid.dirty || UserNamevalid.touched)
+                  ? 'is-invalid '
+                  : ''
+              "
+            />
+            <div *ngIf="UserNamevalid.invalid" class="invalid-feedback">
+              please enter the name min 3 characters
+            </div>
+          </div>
+
+          <div class="form-outline mb-3">
+            <label class="form-label" for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              name="name"
+              ngModel
+              required
+              minlength="3"
+              maxlength="15"
+              #Namevalid="ngModel"
+              [(ngModel)]="Name"
+              [ngClass]="
+                Namevalid.invalid && (Namevalid.dirty || Namevalid.touched)
+                  ? 'is-invalid '
+                  : ''
+              "
+            />
+            <div *ngIf="Namevalid.invalid" class="invalid-feedback">
+              please enter the name min 3 characters
+            </div>
+          </div>
+
+          <div class="form-outline mb-3">
+            <label class="form-label" for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              name="password"
+              ngModel
+              [(ngModel)]="Password"
+              required
+              minlength="3"
+              maxlength="10"
+              #passwordvalid="ngModel"
+              [ngClass]="
+                passwordvalid.invalid &&
+                (passwordvalid.dirty || passwordvalid.touched)
+                  ? 'is-invalid'
+                  : ''
+              "
+            />
+            <div *ngIf="passwordvalid.invalid" class="invalid-feedback">
+              please enter the name min 3 characters
+            </div>
+          </div>
+
+          <div class="form-outline mb-3">
+            <label class="form-label" for="confirmPassword"
+              >Confirm Password</label
+            >
+            <input
+              type="password"
+              id="conPassword"
+              class="form-control"
+              name="confirmPassword"
+              ngModel
+              required
+              pattern="{{ passwordvalid.value }}"
+              #confpass="ngModel"
+              [ngClass]="
+                confpass.value !== passwordvalid.value &&
+                (confpass.dirty || confpass.touched)
+                  ? 'is-invalid'
+                  : ''
+              "
+            />
+            <div *ngIf="confpass.invalid" class="invalid-feedback">
+              Password is mismatch
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center mb-4">
+            <span>Already registered?</span>
+            <a
+              routerLink="/login"
+              class="text-primary text-decoration-none px-2"
+              >Login here</a
+            >
+          </div>
+
+          <div class="d-grid gap-2 mb-5">
+            <button
+              type="submit"
+              class="bttn"
+              [disabled]="registerForm.invalid"
+            >
+              Register
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

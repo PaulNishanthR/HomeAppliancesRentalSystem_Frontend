@@ -1,0 +1,131 @@
+<div class="row">
+  <div class="col-6">
+    <div class="container my-5">
+      <p class="fs-1">Product Delivery Details</p>
+      <div class="loginpage">
+        <form (ngSubmit)="onSubmit(addressForm)" #addressForm="ngForm">
+          <div>
+            <label class="form-label" for="street">Address</label>
+
+            <input
+              type="text"
+              placeholder="Enter street"
+              class="form-control"
+              name="address"
+              [(ngModel)]="addressModel.address"
+              required
+              minlength="2"
+              maxlength="100"
+              #modelAddress="ngModel"
+              [ngClass]="
+                modelAddress.invalid && modelAddress.dirty ? 'is-invalid' : ''
+              "
+            />
+            <div *ngIf="modelAddress.invalid" class="invalid-feedback">
+              Enter valid address
+            </div>
+          </div>
+          <div>
+            <label class="form-label" for="city">City</label>
+
+            <input
+              type="text"
+              placeholder="Enter city"
+              class="form-control"
+              name="city"
+              [(ngModel)]="addressModel.city"
+              required
+              minlength="2"
+              maxlength="100"
+              #modelCity="ngModel"
+              [ngClass]="
+                modelCity.invalid && modelCity.dirty ? 'is-invalid' : ''
+              "
+            />
+            <div *ngIf="modelCity.invalid" class="invalid-feedback">
+              Enter valid city name
+            </div>
+          </div>
+          <div>
+            <label class="form-label" for="zipcode">Zipcode</label>
+
+            <input
+              type="text"
+              placeholder="Enter Zipcode"
+              class="form-control"
+              name="zipcode"
+              [(ngModel)]="addressModel.zipcode"
+              required
+              minlength="6"
+              #modelCode="ngModel"
+              [ngClass]="
+                modelCode.invalid && modelCode.dirty ? 'is-invalid' : ''
+              "
+            />
+            <div *ngIf="modelCode.invalid" class="invalid-feedback">
+              Enter valid zipcode
+            </div>
+          </div>
+
+          <br />
+          <div>
+            <button
+              class="btn btn-address"
+              type="submit"
+              (click)="postAddress(addressForm)"
+            >
+              Save Address
+            </button>
+          </div>
+        </form>
+        <br /><br />
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="container my-5">
+      <div>
+        <table class="table table-bordered table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Address</th>
+              <th scope="col">City</th>
+              <th scope="col">Zipcode</th>
+              <th scope="col">Edit Address</th>
+              <th scope="col">Delete Address</th>
+            </tr>
+          </thead>
+          <tbody id="table">
+            <tr *ngFor="let add of addresses" [ngClass]="add.id ? 'table-info' : ''">
+              <th scope="row">{{ add.address }}</th>
+              <td>{{ add.city }}</td>
+              <td>{{ add.zipcode }}</td>
+              <td>
+                <button action="edit" class="btn-del" (click)="onEdit(add)">
+                  Edit
+                </button>
+              </td>
+              <td>
+                <button
+                  action="edit"
+                  class="btn-del mx-4"
+                  (click)="onDelete(add.id)"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button
+        class="btn btn-address"
+        type="button"
+        routerLink="/order"
+        (click)="checkout()"
+      >
+        Place Order
+      </button>
+    </div>
+  </div>
+</div>

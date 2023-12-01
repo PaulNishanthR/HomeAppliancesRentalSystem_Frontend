@@ -1,0 +1,170 @@
+<div *ngIf="!isLoggedIn">
+  <router-outlet />
+</div>
+
+<div
+  *ngIf="isLoggedIn"
+  class="container-fluid vh-100 d-flex flex-column"
+  style="padding: 0% !important"
+>
+  <div class="row justify-content-right"></div>
+
+  <div *ngIf="isAdmin" class="row flex-grow-1">
+    <!-- <header class="navbar sticky-top bg-primary shadow">
+      <a class="projname navbar-brand px-3 text-white" routerLink="/"
+        >Rental System</a
+      >
+
+      <div class="parent">
+        <div
+          class="navbar-nav px-4 text-white child align-items-center"
+          (click)="logout()"
+          role="button"
+        >
+          <i
+            class="fa-solid fa-solid fa-beat fa-right-from-bracket text-white"
+          ></i>
+        </div>
+      </div>
+    </header> -->
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/">Rental System</a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" (click)="logout()" role="button">
+                <i class="fa-solid fa-beat fa-right-from-bracket"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="sidebar border border-right col-2 p-0">
+      <div class="bg-body-tertiary h-100" tabindex="-1">
+        <div class="d-flex flex-column p-0" style="padding-top: 67% !important;">
+          <ul class="nav flex-column">
+            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
+              <i class="fa-solid fa-house"></i>
+              <a class="nav-link d-flex align-items-center"> Dashboard </a>
+            </li>
+            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
+              <i class="fa-solid fa-book"></i>
+              <a
+                class="nav-link d-flex align-items-center"
+                routerLink="admincategory"
+                >Categories
+              </a>
+            </li>
+            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
+              <i class="fa-solid fa-book"></i>
+              <a class="nav-link d-flex align-items-center" routerLink="admin"
+                >Products
+              </a>
+            </li>
+            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
+              <i class="fa-solid fa-user"></i>
+              <a class="nav-link d-flex align-items-center" routerLink="users"
+                >Users</a
+              >
+            </li>
+            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              <a
+                class="nav-link d-flex align-items-center"
+                routerLink="adminorder"
+                >Orders
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <main class="col-10 px-4">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  <div *ngIf="!isAdmin">
+    <!-- <header class="navbar sticky-top bg-primary shadow">
+      <a class="projname navbar-brand px-3 text-white" routerLink="/"
+        >Rental System</a
+      >
+
+      <div class="parent">
+        <div class="child px-4">
+          <i
+            (click)="cartCount()"
+            class="fa-solid fa-cart-shopping text-white"
+            routerLink="/cart"
+          ></i>
+          <span class="cart-count-badge" *ngIf="cartItemCount > 0">{{
+            cartItemCount
+          }}</span>
+        </div>
+
+        <div class="child px-4">
+          <i class="fa-solid fa-truck-fast text-white" routerLink="/order"></i>
+        </div>
+
+        <div
+          class="navbar-nav px-4 text-white child align-items-center"
+          (click)="logout()"
+          role="button"
+        >
+          <i class="fa-solid fa-solid fa-right-from-bracket text-white"></i>
+        </div>
+      </div>
+    </header> -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow">
+      <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/">Rental System</a>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" (click)="cartCount()" routerLink="/cart">
+                <i class="fa-solid fa-cart-shopping" style="font-size: 20px; padding-right: 5px;">
+                  <span class="position-sticky top-0 start-100 translate-middle badge rounded-pill bg-danger" *ngIf="cartItemCount > 0">{{
+                    cartItemCount
+                  }}</span></i>
+                
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/order">
+                <i class="fa-solid fa-truck-fast" style="font-size: 20px; padding-right: 5px;"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="logout()">
+                <i class="fa-solid fa-right-from-bracket" style="font-size: 20px; padding-right: 5px;"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div *ngIf="loaderService.isLoading | async" class="loader">
+  <ng-lottie [options]="options"></ng-lottie>
+</div>

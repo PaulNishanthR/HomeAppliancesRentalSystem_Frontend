@@ -1,0 +1,40 @@
+<div class="container bootdey">
+  <div class="row">
+    <div
+      class="product-grid col-xs-12 col-sm-6 col-md-3"
+      *ngFor="let product of products"
+    >
+      <div class="product-item">
+        <div class="">
+          <img
+            class="card-img-top"
+            src="{{ 'http://localhost:8080/api/admin/product/downloadFile/' }}{{
+              product.id
+            }}"
+            alt="Product Image"
+          />
+        </div>
+        <div class="card-body caption">
+          <div class="name text-center card-title">
+            <span>{{ product.title }}</span>
+          </div>
+          <div class="card-text price">
+            <span>₹{{ product.price }}</span>
+          </div>
+          <div class="card-text price">
+            <span>{{ product.description }}</span>
+          </div>
+          <div class="cart">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="postCart(product.id)"
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

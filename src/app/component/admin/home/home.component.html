@@ -1,0 +1,193 @@
+<div class="d-flex justify-content-between align-items-center mt mt-5">
+  <h1>Product :</h1>
+  <button
+    type="button"
+    class="btn bttn-bg"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+    data-bs-whatever="@mdo"
+  >
+    + Add Product
+  </button>
+</div>
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Product</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit(productForm)" #productForm="ngForm">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="recipient-name"
+              name="title"
+              [(ngModel)]="productModel.title"
+              required
+              #modelTitle="ngModel"
+              [ngClass]="
+                modelTitle.invalid && modelTitle.dirty ? 'is-invalid' : ''
+              "
+              (change)="onFileChange($event)"
+            />
+            <div *ngIf="modelTitle.invalid" class="invalid-feedback">
+              Enter valid product name
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Price</label>
+            <input
+              type="text"
+              name="price"
+              class="form-control"
+              id="recipient-name"
+              [(ngModel)]="productModel.price"
+              required
+              #modelPrice="ngModel"
+              [ngClass]="
+                modelPrice.invalid && modelPrice.dirty ? 'is-invalid' : ''
+              "
+            />
+            <div *ngIf="modelPrice.invalid" class="invalid-feedback">
+              Enter valid price amount
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label"
+              >Description</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="description"
+              id="recipient-name"
+              [(ngModel)]="productModel.description"
+              required
+              #modelDesc="ngModel"
+              [ngClass]="
+                modelDesc.invalid && modelDesc.dirty ? 'is-invalid' : ''
+              "
+            />
+            <div *ngIf="modelDesc.invalid" class="invalid-feedback">
+              Enter valid description
+            </div>
+            <div class="form-group mb-2">
+              <label class="control-label mb-2" for="filebutton">Image</label>
+              <div class="col-6">
+                <input
+                  id="filebutton"
+                  name="photo"
+                  class="form-control"
+                  class="input-file"
+                  type="file"
+                  ngModel
+                  (change)="onFileChange($event)"
+                />
+                <div
+                  *ngIf="
+                    productForm.controls['image']?.invalid &&
+                    (productForm.controls['image']?.dirty ||
+                      productForm.controls['image']?.touched)
+                  "
+                  class="text-danger"
+                >
+                  Please select an image.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="category-select" class="col-form-label">Category</label>
+            <select
+              id="category-select"
+              class="form-select"
+              class="form-control"
+              aria-label="Default select example"
+              [(ngModel)]="productModel.categoryId"
+              name="category_id"
+            >
+              <option value="" selected>Select Category</option>
+              <option *ngFor="let category of categories" [value]="category.id">
+                {{ category.title }}
+              </option>
+            </select>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-success text-dark">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container my-4">
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Product</th>
+          <th scope="col">Description</th>
+          <th scope="col">Price</th>
+          <th scope="col">Category</th>
+          <th scope="col">Action</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody id="tablebody">
+        <tr *ngFor="let product of products">
+          <script>
+            console.log("productt -> ", product);
+          </script>
+          <td>{{ product.id }}</td>
+          <td>{{ product.title }}</td>
+          <td>{{ product.description }}</td>
+          <td>₹{{ product.price }}</td>
+          <td>{{ product.category?.title }}</td>
+          <td>
+            <button
+              class="btn-del mx-3"
+              action="edit"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              data-bs-whatever="@mdo"
+              (click)="onEdit(product)"
+            >
+              Edit
+            </button>
+            <button
+              action="edit"
+              class="btn-del"
+              (click)="onDelete(product.id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
