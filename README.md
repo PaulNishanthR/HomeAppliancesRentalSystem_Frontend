@@ -59,7 +59,8 @@ Reposititory link of the front end :
 Reposititory link of the back end : 
 https://github.com/PaulNishanthR/HomeAppliancesRentalSystem
 
-➡️ MySQL Schema Capture-1
+➡️ MySQL Schema 
+<img width="651" alt="Capture-1" src="https://github.com/PaulNishanthR/HomeAppliancesRentalSystem_Frontend/assets/145538205/0fb13e80-d86f-4d54-9d76-c6af92e84230">
 
 ➡️ Demo Video Url 
 https://drive.google.com/file/d/1zF9588JVm4K0xGzWyXPC3-ZAKPhnEt5r/view?usp=sharing
