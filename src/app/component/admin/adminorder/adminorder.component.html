@@ -8,31 +8,31 @@
       <tr>
         <th scope="col">Order Id</th>
         <th scope="col">User ID</th>
+        <th scope="col">User Name</th>
+        <th scope="col">Product</th>
         <th scope="col">Status</th>
-        <!-- <th scope="col">Action</th> -->
       </tr>
     </thead>
     <tbody id="table">
       <tr *ngFor="let order of orders">
         <td>{{ order.id }}</td>
         <td>{{ order.userId }}</td>
+        <td>{{ order.username }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let product of order.orderedProductList">
+              {{ product.title }}
+            </li>
+          </ul>
+        </td>
+
         <td>{{ order.orderStatus }}</td>
-        <!-- <td>
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Select the status</option>
-            <option value="1">Pending</option>
-            <option value="2">Confirmed</option>
-            <option value="3">Out for Delivery</option>
-            <option value="4">Delivered</option>
-          </select>
-        </td> -->
       </tr>
     </tbody>
   </table>
 </div>
 
 <!-- Update Order Status -->
-
 <div>
   <h2>Update Order Status</h2>
   <table>
@@ -59,115 +59,3 @@
     </tr>
   </table>
 </div>
-
-<!-- Get User's Orders by ID
-<div>
-  <h2>User Orders</h2>
-  <input type="number" [(ngModel)]="userId" placeholder="Enter User ID" />
-  <button class="btn btn-del" (click)="getUsersOrder()">Get User Orders</button>
-  <ul>
-    <li *ngFor="let order of userOrders">
-      Order ID: {{ order.id }} - User ID: {{ order.userId }} - Status:
-      {{ order.orderStatus }}
-    </li>
-  </ul>
-</div>
-
-Display All Order Status
-<div>
-  <h2>All Order Status</h2>
-  <button class="btn btn-del" (click)="getAllOrderStatus()">
-    Get All Order Status
-  </button>
-  <ul>
-    <li *ngFor="let status of orderStatusList">
-      Status ID: {{ status.orderId }} - Status: {{ status.orderStatus }}
-    </li>
-  </ul>
-</div> -->
-
-<!-- <div class="container my-4">
-  <h2>All Orders</h2>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th scope="col">Order Id</th>
-        <th scope="col">User ID</th>
-        <th scope="col">Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order of orders" (click)="selectUserOrder(order)">
-        <td>{{ order.id }}</td>
-        <td>{{ order.userId }}</td>
-        <td>
-          <ng-container *ngIf="selectedOrder && selectedOrder.id === order.id; else statusDisplay">
-            <select [(ngModel)]="selectedOrder.orderStatus" (change)="updateOrderStatus()">
-              <option *ngFor="let status of orderStatusList" [value]="status.orderStatus">
-                {{ status.orderStatus }}
-              </option>
-            </select>
-          </ng-container>
-          <ng-template #statusDisplay>
-            {{ order.orderStatus }}
-          </ng-template>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div *ngIf="selectedOrder">
-    <h3>User's Order Details</h3>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">Order Id</th>
-          <th scope="col">User ID</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ selectedOrder.id }}</td>
-          <td>{{ selectedOrder.userId }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div> -->
-
-<!-- order using table -->
-<!-- <div class="container my-5">
-  <h1>Orders</h1>
-  <table class="rwd-table">
-    <tr>
-      <th scope="col">Order ID</th>
-      <th scope="col">userId</th>
-      <th scope="col">Address</th>
-      <th scope="col">City</th>
-      <th scope="col">Zipcode</th>
-      <th scope="col">Order Status</th>
-      
-    </tr>
-    <tr *ngFor="let order of orders">
-      <td>{{ order.id }}</td>
-      <td>{{ order.userId }}</td>
-      <td>{{ order.address.address }}</td>
-      <td>{{ order.address.city }}</td>
-      <td>{{ order.address.zipcode }}</td>
-      <td>
-        <label for="status-select" class="col-form-label">Status</label>
-        <select
-          id="status-select"
-          class="form-select"
-          aria-label="Default select example"
-          
-          name="category_id"
-        >
-          <option value="" selected>Select Category</option>
-          <option *ngFor="let sta of status" [value]="status?.statusId">
-            {{ sta.orderStatus }}
-          </option>
-        </select></td>
-      
-    </tr>
-  </table>
-</div> -->

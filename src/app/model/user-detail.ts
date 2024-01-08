@@ -1,10 +1,11 @@
-import { Address } from "./address";
+import { Address } from './address';
 
 export interface UserDetail {
-    id: number;
-    username: string;
-    name: string;
-    roles: string;
-    joinedAt: string;
-    addressList: Address[];
+  id: number;
+  username: string;
+  name: string;
+  roles: string;
+  joinedAt?: string;
+  addressList: Address[];
+  created_at?: Date;
 }

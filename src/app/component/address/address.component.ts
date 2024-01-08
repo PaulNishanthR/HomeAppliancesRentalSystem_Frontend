@@ -18,8 +18,6 @@ import { StorageService } from 'src/app/service/storage.service';
   styleUrls: ['./address.component.css'],
 })
 export class AddressComponent implements OnInit {
-  
-
   showAnimation: boolean = false;
   constructor(
     private router: Router,
@@ -54,7 +52,6 @@ export class AddressComponent implements OnInit {
 
   onSubmit(addressForm: NgForm) {
     // this.showAnimation = true;
-
     // setTimeout(() => {
     //   this.showAnimation = false;
     // }, 2000);
@@ -82,7 +79,7 @@ export class AddressComponent implements OnInit {
     this.addressService.getAllAddress(userId).subscribe({
       next: (response: AppResponse) => {
         if (response && response.data) {
-          this.addresses = response.data?.addressList;
+          this.addresses = response.data.addressList;
           console.log('xxx', this.addresses);
         } else {
           console.error('Invalid API response format:', response);
@@ -97,14 +94,20 @@ export class AddressComponent implements OnInit {
 
   postAddress(addressForm: NgForm) {
     if (addressForm.valid) {
+      let userId: number = this.storageService.getLoggedInUser().id;
+      console.log('UserID:', userId); // Log to check if userId is correct
+
+      // Make sure userId is set in addressModel before calling postAddress
+      this.addressModel.userId = userId;
       this.addressService.postAddress(this.addressModel).subscribe({
         next: (response: AppResponse) => {
           if (response && response.data) {
             this.addresses = response.data.addressList;
-            this.addressModel = { ...this.INITIAL_ADDRESS };
+            this.addressModel = this.INITIAL_ADDRESS;
             addressForm.resetForm();
+            // this.addressModel.userId = this.storageService.getLoggedInUser().id;
 
-            let userId: number = this.storageService.getLoggedInUser().id;
+            // let userId: number = this.storageService.getLoggedInUser().id;
 
             this.getAllAddress(userId);
           }
@@ -114,23 +117,23 @@ export class AddressComponent implements OnInit {
         },
       });
     } else {
-      console.log('Form is invalid. Please check the entered details.');
+      // console.log('Form is invalid. Please check the entered details.');
+      this.addressService.putAddress(this.addressModel).subscribe({
+        next: (response: any) => {
+          this.addresses = response.data;
+          this.addressModel = this.INITIAL_ADDRESS;
+
+          let userId: number = this.storageService.getLoggedInUser().id;
+
+          this.getAllAddress(userId);
+
+          addressForm.resetForm();
+        },
+        error: (err) => {
+          console.log(err?.error?.error?.message);
+        },
+      });
     }
-    this.addressService.putAddress(this.addressModel).subscribe({
-      next: (response: any) => {
-        this.addresses = response.data;
-        this.addressModel = this.INITIAL_ADDRESS;
-
-        let userId: number = this.storageService.getLoggedInUser().id;
-
-        this.getAllAddress(userId);
-
-        addressForm.resetForm();
-      },
-      error: (err) => {
-        console.log(err?.error?.error?.message);
-      },
-    });
   }
 
   onDelete(id: number | undefined) {
@@ -235,7 +238,5 @@ export class AddressComponent implements OnInit {
       console.error('User not logged in.');
       console.log('nope');
     }
-
-   
   }
 }

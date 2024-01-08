@@ -7,8 +7,8 @@ export interface Order {
   name: string;
   username: string;
   address: Address;
-  product: Product;
+  product: Product[];
   orderStatus: OrderStatus;
   userId?: number;
-  
+  orderedProductList: Product[];
 }

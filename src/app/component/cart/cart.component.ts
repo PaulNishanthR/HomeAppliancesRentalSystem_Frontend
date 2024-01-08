@@ -98,13 +98,16 @@ export class CartComponent implements OnInit {
   deleteCart(event: Event, userId: number | undefined, productCartId: number | undefined) {
     event.preventDefault(); 
     console.log('deletecart : ', userId, 'productid : ', productCartId);
-    userId = this.storageService.getLoggedInUser().id;
+    userId = this.storageService.getLoggedInUser()?.id;
     console.log('deletecart : ', userId, 'productid : ', productCartId);
 
     if (userId !== undefined && productCartId !== undefined) {
       this.cartService.deleteCart(userId, productCartId).subscribe({
         next: (response: any) => {
-          this.cartProducts = response.data;
+          // this.cartProducts = response.data;
+          console.log("Deleted cart item:",response);
+          
+          this.getAllCart();
         },
         error: (err) => {
           console.log(err?.error?.error?.message);
@@ -114,6 +117,44 @@ export class CartComponent implements OnInit {
       console.log('Error');
     }
   }
+
+  // deleteCart(event: Event, userId: number | undefined, productCartId: number | undefined) {
+  //   event.preventDefault(); 
+  //   console.log('deletecart : ', userId, 'productid : ', productCartId);
+  //   userId = this.storageService.getLoggedInUser()?.id;
+  //   console.log('deletecart : ', userId, 'productid : ', productCartId);
+  
+  //   if (userId !== undefined && productCartId !== undefined) {
+  //     this.cartService.deleteCart(userId, productCartId).subscribe({
+  //       next: (response: any) => {
+  //         console.log("Deleted cart item:", response);
+  //         // Remove the deleted cart item from cartProducts array
+  //         this.cartProducts = this.cartProducts.filter(cart => cart.product?.id !== productCartId);
+  //         // Recalculate total price after deletion
+  //         this.calculateTotalPrice();
+  //       },
+  //       error: (err) => {
+  //         console.log(err?.error?.error?.message);
+  //         // Handle the error here
+  //         // For example, display an error message to the user
+  //         // or perform any necessary actions based on the error
+  //       },
+  //     });
+  //   } else {
+  //     console.log('Error');
+  //   }
+  // }
+  
+  // calculateTotalPrice() {
+  //   this.totalPrice = 0;
+  //   for (let cart of this.cartProducts) {
+  //     if (cart.product?.price !== undefined) {
+  //       this.totalPrice += cart?.product?.price;
+  //     }
+  //   }
+  // }
+  
+  
 
   someValue: any;
   productsForOrder: any[] = [];

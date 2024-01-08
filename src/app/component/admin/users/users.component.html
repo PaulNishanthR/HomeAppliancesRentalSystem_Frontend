@@ -1,4 +1,4 @@
-<div class="container-fluid vh-100 my-9" style="margin-top: 7%;" >
+<div class="container-fluid vh-100 my-9" style="margin-top: 7%">
   <div class="row">
     <div class="col-6">
       <h5>User Home</h5>
@@ -21,7 +21,7 @@
             <th scope="row">{{ user.id }}</th>
             <td>{{ user.name }}</td>
             <td>{{ user.username }}</td>
-            <td>{{ user.joinedAt }}</td>
+            <td>{{ user.created_at | date : "mediumDate" }}</td>
           </tr>
         </tbody>
       </table>

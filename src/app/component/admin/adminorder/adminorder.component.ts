@@ -15,7 +15,7 @@ export class AdminorderComponent implements OnInit {
   orders: Order[] = [];
   userOrders: Order[] = [];
   orderStatusList: OrderStatus[] = [];
-  status:OrderStatus[]=[]
+  status: OrderStatus[] = [];
 
   userId: number | undefined;
   orderId: number | undefined;
@@ -29,10 +29,11 @@ export class AdminorderComponent implements OnInit {
   getAllOrders() {
     this.adminOrderService.getAllOrders().subscribe((response: any) => {
       this.orders = response.data;
+      console.log('ordered product-->', this.orders);
     });
   }
 
-  // getAllOrders(userId: number) { 
+  // getAllOrders(userId: number) {
   //   this.adminOrderService.getAllOrders().subscribe({
   //     next: (response: AppResponse) => {
   //       if (response && response.data) {
@@ -59,9 +60,8 @@ export class AdminorderComponent implements OnInit {
   //     }
   //   );
   // }
-  
+
   // Similar log statements can be added in other methods to track data flow.
-  
 
   getUsersOrder() {
     if (this.userId !== undefined) {
@@ -89,26 +89,8 @@ export class AdminorderComponent implements OnInit {
         .subscribe((response: any) => {});
     }
   }
-  // updateOrderStatus() {
-  //   if (this.selectedOrder && this.statusId !== undefined) {
-  //     const orderStatusRequest = {
-  //       orderId: this.selectedOrder.id,
-  //       statusId: this.statusId,
-  //     };
-
-  //     this.adminOrderService
-  //       .updateOrderStatus(orderStatusRequest)
-  //       .subscribe((response: any) => {
-  //         // Handle response if needed
-  //       });
-  //   }
-  // }
 
   selectUserOrder(order: Order): void {
     this.selectedOrder = order;
   }
-
-
 }
-
-

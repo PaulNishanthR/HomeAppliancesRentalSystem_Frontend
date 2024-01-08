@@ -15,7 +15,7 @@ export class UsersComponent implements OnInit {
     username: '',
     name: '',
     roles: '',
-    joinedAt: '',
+    created_at:new Date(),
     addressList: [],
   };
 
@@ -28,6 +28,8 @@ export class UsersComponent implements OnInit {
         if (userDetails.length > 0) {
           this.userDetails = userDetails;
           this.userDetail = userDetails[0];
+          console.log('User Detailssss:', this.userDetails);
+
         }
       },
       error: (err) => {

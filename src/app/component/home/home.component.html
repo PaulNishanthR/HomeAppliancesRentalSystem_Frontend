@@ -1,3 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <p
+        *ngIf="isUserLoggedIn()"
+        class="welcome-message mx-4 vertical-text"
+        style="font-family: sans-serif; font-size: 5vh !important"
+      >
+        Welcome, {{ getLoggedInUserName() }}!
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="input-group custom-search">
+        <input
+          class="form-control rounded"
+          type="search"
+          placeholder="Search Property By Name"
+          aria-label="Search"
+          [(ngModel)]="search"
+          (ngModelChange)="filterArray()"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="btn-group">
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Sort by Price
+        </button>
+        <div class="dropdown-menu">
+          <button class="dropdown-item" (click)="sortProductsLowToHigh()">
+            Low to High
+          </button>
+          <button class="dropdown-item" (click)="sortProductsHighToLow()">
+            High to Low
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+
 <div class="container bootdey">
   <div class="row">
     <div

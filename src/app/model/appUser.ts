@@ -1,6 +1,6 @@
 export interface AppUser {
   id: number;
-  username: String;
+  username?: String;
   password: String;
   role: String;
 }
