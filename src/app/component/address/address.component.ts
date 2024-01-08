@@ -50,6 +50,9 @@ export class AddressComponent implements OnInit {
   isCartEmpty: boolean = true;
   userDetails: UserDetail[] = [];
 
+  selectedAddress: Address | undefined;
+  loggedInUserId: number = this.storageService.getLoggedInUser().id;
+
   onSubmit(addressForm: NgForm) {
     // this.showAnimation = true;
     // setTimeout(() => {
@@ -228,15 +231,58 @@ export class AddressComponent implements OnInit {
     );
   }
 
-  checkout() {
-    console.log('got In');
-    const loggedInUser = this.storageService.getLoggedInUser();
+  // checkout() {
+  //   console.log('got In');
+  //   const loggedInUser = this.storageService.getLoggedInUser();
 
-    if (loggedInUser) {
-      this.loadUserDetails();
+  //   if (loggedInUser) {
+  //     this.loadUserDetails();
+  //   } else {
+  //     console.error('User not logged in.');
+  //     console.log('nope');
+  //   }
+  // }
+
+  checkout() {
+    if (this.loggedInUserId && this.selectedAddress) {
+      const order = {
+        userId: this.loggedInUserId,
+        addressId: this.selectedAddress.id,
+      };
+  
+      this.orderService.postOrder(order).subscribe({
+        next: (response: any) => {
+          // Handle the response if needed
+          console.log('Order created:', response);
+        },
+        error: (err) => {
+          console.error('Error creating order:', err);
+        },
+      });
     } else {
-      console.error('User not logged in.');
-      console.log('nope');
+      console.error('User ID or address is not selected.');
     }
   }
+  
+
+  // onAddressSelection(event: any, selectedAddress: Address) {
+  //   selectedAddress.checked = event.target.checked;
+
+  //   this.addresses.forEach((address) => {
+  //     if (address.id !== selectedAddress.id) {
+  //       address.checked = false;
+  //     }
+  //   });
+  //   this.addressService.setSelectedAddress(selectedAddress);
+  // }
+
+  onAddressSelection(event: any, selectedAddress: Address) {
+    // Set the selected address when the checkbox is checked
+    if (event.target.checked) {
+      this.selectedAddress = selectedAddress;
+    } else {
+      this.selectedAddress = undefined;
+    }
+  }
+  
 }

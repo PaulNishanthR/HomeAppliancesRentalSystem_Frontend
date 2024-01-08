@@ -34,4 +34,13 @@ export class AddressService {
       `${urlEndpoint.baseUrl}/user/address/${id}`
     );
   }
+
+  private selectedAddress: Address | undefined;
+  setSelectedAddress(address: Address) {
+    this.selectedAddress = address;
+  }
+
+  getSelectedAddress(): Address | undefined {
+    return this.selectedAddress;
+  }
 }

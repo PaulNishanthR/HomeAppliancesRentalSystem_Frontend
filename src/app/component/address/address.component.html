@@ -96,8 +96,18 @@
             </tr>
           </thead>
           <tbody id="table">
-            <tr *ngFor="let add of addresses" [ngClass]="add.id ? 'table-info' : ''">
-              <th scope="row">{{ add.address }}</th>
+            <tr
+              *ngFor="let add of addresses"
+              [ngClass]="add.id ? 'table-info' : ''"
+            >
+              <td>
+                <input
+                  type="checkbox"
+                  (change)="onAddressSelection($event, add)"
+                  [checked]="add.checked"
+                />
+              </td>
+              <td>{{ add.address }}</td>
               <td>{{ add.city }}</td>
               <td>{{ add.zipcode }}</td>
               <td>

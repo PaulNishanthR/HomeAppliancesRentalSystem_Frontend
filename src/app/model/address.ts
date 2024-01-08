@@ -5,4 +5,5 @@ export interface Address {
   city: string;
   zipcode: string;
   userId?: number;
+  checked?: boolean;
 }
