@@ -124,11 +124,9 @@ login(login: Login): Observable<AppResponse> {
     .post<AppResponse>(`${urlEndpoint.baseUrl}/auth/login`, login)
     .pipe(
       map((response) => {
-        const user = response.data as AppUser;
-        this.userSubject.next(
+        this.storageService.setAuthData(
           window.btoa(login.username + ':' + login.password)
         );
-        this.setLoggedIn(user);
         return response;
       })
     );
@@ -159,7 +157,7 @@ setLoggedIn(user: AppUser): void {
     this.router.navigate(['/'], { replaceUrl: true });
   } else if (user.role === CONSTANT.ADMIN) {
     this.isAdminSubject.next(true);
-    this.router.navigate(['/admin'], { replaceUrl: true });
+    this.router.navigate(['/dashboard'], { replaceUrl: true });
   }
 }
 

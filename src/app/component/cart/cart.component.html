@@ -8,7 +8,6 @@
         <table class="table table-bordered m-0">
           <thead>
             <tr>
-              <!-- Set columns width -->
               <th class="text-center py-3 px-4" style="min-width: 400px">
                 Product Name &amp; Details
               </th>
@@ -78,7 +77,6 @@
           </tbody>
         </table>
       </div>
-      <!-- / Shopping cart table -->
 
       <div
         class="d-flex flex-wrap justify-content-between align-items-center pb-4"
@@ -86,20 +84,10 @@
         <div class="mt-4"></div>
         <div class="d-flex">
           <div class="text-right mt-4 mr-5"></div>
-          <!-- <div class="text-right mt-4">
-            <label class="text-total font-weight-normal m-0 text-white"
-              >Total price</label
-            >
-            <div class="text-large text-total">
-              <strong
-                >₹{{totalPrice}}</strong
-              >
-            </div>
-          </div> -->
         </div>
       </div>
 
-      <div class="float-right">
+      <!-- <div class="float-right">
         <button
           type="button"
           class="btn btn-lg btn-default md-btn-flat mt-2 mr-3"
@@ -111,6 +99,28 @@
         <button
           type="button"
           class="btn bttn-bg btn-lg btn-primary mt-2"
+          routerLink="/address"
+        >
+          Checkout
+        </button>
+      </div> -->
+      <!-- Go back button placed at the bottom left -->
+      <div class="float-left mt-3">
+        <button
+          type="button"
+          class="btn btn-lg btn-default md-btn-flat mt-2"
+          routerLink=""
+          class="btn btn-lg mt-2 cartHeading"
+        >
+          Back to shopping
+        </button>
+      </div>
+
+      <!-- Checkout button placed at the bottom right -->
+      <div class="float-right mt-3">
+        <button
+          type="button"
+          class="btn bttn-bg btn-lg btn-primary mt-2 mr-3"
           routerLink="/address"
         >
           Checkout

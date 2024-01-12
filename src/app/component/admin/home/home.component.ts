@@ -38,8 +38,43 @@ export class AdminHomeComponent implements OnInit {
   file = '';
   editId: number | undefined = 0;
 
+  // Pagination variables
+  itemsPerPage = 3; // Number of items to display per page
+  currentPage = 1; // Current page
+  totalPages: number[] = []; // Array to hold total pages
+  displayedProducts: Product[] = []; // Subset of products to display based on pagination
+
+  // ngOnInit(): void {
+  //   this.getAllProducts();
+  //   this.calculateTotalPages();
+  // }
+
   ngOnInit(): void {
+    this.retrieveData();
+  }
+
+  // Function to retrieve data (products and categories)
+  retrieveData() {
     this.getAllProducts();
+    this.getAllCategories();
+  }
+
+  // Function to calculate total pages based on total products and items per page
+  calculateTotalPages() {
+    const totalProducts = this.products.length;
+    const pages = Math.ceil(totalProducts / this.itemsPerPage);
+    this.totalPages = Array(pages)
+      .fill(0)
+      .map((x, i) => i + 1);
+    this.changePage(1); // Display first page initially
+  }
+
+  // Function to change page
+  changePage(pageNumber: number) {
+    this.currentPage = pageNumber;
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.displayedProducts = this.products.slice(startIndex, endIndex);
   }
 
   edit(id: number | undefined) {
@@ -52,6 +87,7 @@ export class AdminHomeComponent implements OnInit {
       next: (response: AppResponse) => {
         if (response && response.data) {
           this.products = response.data;
+          this.calculateTotalPages();
           // console.log('responsedata');
         } else {
           console.error('Invalid API response format:', response);
@@ -62,7 +98,8 @@ export class AdminHomeComponent implements OnInit {
       },
       complete: () => console.log('There are no more actions happening.'),
     });
-
+  }
+  getAllCategories() {
     this.categoryService.getCategories().subscribe({
       next: (response: AppResponse) => {
         if (response && response.data) {
@@ -149,6 +186,18 @@ export class AdminHomeComponent implements OnInit {
       this.file = fileInput.files[0];
 
       console.log('Selected file:', this.file);
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.changePage(this.currentPage - 1);
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages.length) {
+      this.changePage(this.currentPage + 1);
     }
   }
 }

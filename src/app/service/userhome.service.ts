@@ -12,6 +12,6 @@ export class UserhomeService {
   constructor(private http:HttpClient) { }
 
   getAllUserProducts(){
-    return this.http.get<AppResponse>(`${urlEndpoint.baseUrl}/product/all`);
+    return this.http.get<AppResponse>(`${urlEndpoint.baseUrl}/product/user/all`);
   }
 }

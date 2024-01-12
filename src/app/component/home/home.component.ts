@@ -33,12 +33,29 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // ngOnInit(): void {
+  //   this.userHomeService.getAllUserProducts().subscribe({
+  //     next: (response: AppResponse) => {
+  //       if (response && response.data) {
+  //         this.products = response.data;
+  //         this.originalProducts = response.data;
+  //       } else {
+  //         console.error('Invalid API response format:', response);
+  //       }
+  //     },
+  //     error: (err: any) => {
+  //       console.log('An error occurred:', err);
+  //     },
+  //     complete: () => console.log('There are no more actions happening.'),
+  //   });
+  // }
+
   ngOnInit(): void {
     this.userHomeService.getAllUserProducts().subscribe({
       next: (response: AppResponse) => {
         if (response && response.data) {
-          this.products = response.data;
           this.originalProducts = response.data;
+          this.products = [...this.originalProducts]; // Initialize products array with a copy of originalProducts
         } else {
           console.error('Invalid API response format:', response);
         }
@@ -49,6 +66,7 @@ export class HomeComponent implements OnInit {
       complete: () => console.log('There are no more actions happening.'),
     });
   }
+  
 
   // Filter the products for the search feature
   filterArray() {

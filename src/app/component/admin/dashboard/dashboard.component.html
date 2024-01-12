@@ -1,0 +1,64 @@
+<!-- <p>dashboard works!</p> -->
+
+
+<style>
+    .welcomeMessage {
+      text-align: center;
+      opacity: 0;
+      font-size: xx-large;
+      /* font-style: italic; */
+      color: crimson;
+      transform: translateY(50px);
+      animation: fadeInUp 1s ease forwards;
+    }
+   
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+   
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <h1 class="display-1 mt-4 text-dark fw-bold welcomeMessage">
+    WELCOME, ADMIN !!!
+  </h1>
+  <!-- <ng-lottie [options]="options"></ng-lottie> -->
+  <br /><br /><br /><br />
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card card-single text-center" style="border: solid black">
+          <i class="fa-sharp fa-solid fa-users mt-3 fa-2x"></i>
+          <span
+            routerLink="/users"
+            class="fw-bold mt-2"
+            style="cursor: pointer; color: brown"
+            >HAPPY USERS!</span
+          >
+          <h2>{{ totalUsers }}</h2>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card card-single text-center" style="border: solid black">
+          <i class="fa-solid fa-shirt"></i>
+          <span
+            routerLink="/admin"
+            class="fw-bold mt-3"
+            style="cursor: pointer; color: brown"
+            >TOTAL PRODUCTS</span
+          >
+          <h2>{{ totalProduct }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>

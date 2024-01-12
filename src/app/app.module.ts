@@ -20,6 +20,8 @@ import { AdmincategoryComponent } from './component/admin/admincategory/admincat
 import { UsersComponent } from './component/admin/users/users.component';
 import { AdminorderComponent } from './component/admin/adminorder/adminorder.component';
 import { AddressComponent } from './component/address/address.component';
+import { DashboardComponent } from './component/admin/dashboard/dashboard.component';
+import { FooterComponent } from './component/footer/footer.component';
 
 export function playerFactory() {
   return player;
@@ -38,6 +40,8 @@ export function playerFactory() {
     UsersComponent,
     AdminorderComponent,
     AddressComponent,
+    DashboardComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

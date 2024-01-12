@@ -31,7 +31,7 @@
       class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow"
     >
       <div class="container-fluid">
-        <a class="navbar-brand" routerLink="/">Rental System</a>
+        <a class="navbar-brand">Rental System</a>
 
         <button
           class="navbar-toggler"
@@ -49,7 +49,7 @@
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
               <a class="nav-link" (click)="logout()" role="button">
-                <i class="fa-solid fa-beat fa-right-from-bracket"></i>
+                <i class="fa-solid fa-right-from-bracket"></i>
               </a>
             </li>
           </ul>
@@ -59,11 +59,16 @@
 
     <div class="sidebar border border-right col-2 p-0">
       <div class="bg-body-tertiary h-100" tabindex="-1">
-        <div class="d-flex flex-column p-0" style="padding-top: 67% !important;">
+        <div class="d-flex flex-column p-0" style="padding-top: 67% !important">
           <ul class="nav flex-column">
             <li class="nav-item d-flex align-items-center px-4 sideBarItem">
               <i class="fa-solid fa-house"></i>
-              <a class="nav-link d-flex align-items-center"> Dashboard </a>
+              <a
+                class="nav-link d-flex align-items-center"
+                routerLink="/dashboard"
+              >
+                Dashboard
+              </a>
             </li>
             <li class="nav-item d-flex align-items-center px-4 sideBarItem">
               <i class="fa-solid fa-book"></i>
@@ -140,21 +145,32 @@
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
               <a class="nav-link" (click)="cartCount()" routerLink="/cart">
-                <i class="fa-solid fa-cart-shopping" style="font-size: 20px; padding-right: 5px;">
-                  <span class="position-sticky top-0 start-100 translate-middle badge rounded-pill bg-danger" *ngIf="cartItemCount > 0">{{
-                    cartItemCount
-                  }}</span></i>
-                
+                <i
+                  class="fa-solid fa-cart-shopping"
+                  style="font-size: 20px; padding-right: 5px"
+                >
+                  <span
+                    class="position-sticky top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                    *ngIf="cartItemCount > 0"
+                    >{{ cartItemCount }}</span
+                  ></i
+                >
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="/order">
-                <i class="fa-solid fa-truck-fast" style="font-size: 20px; padding-right: 5px;"></i>
+                <i
+                  class="fa-solid fa-truck-fast"
+                  style="font-size: 20px; padding-right: 5px"
+                ></i>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" (click)="logout()">
-                <i class="fa-solid fa-right-from-bracket" style="font-size: 20px; padding-right: 5px;"></i>
+                <i
+                  class="fa-solid fa-right-from-bracket"
+                  style="font-size: 20px; padding-right: 5px"
+                ></i>
               </a>
             </li>
           </ul>

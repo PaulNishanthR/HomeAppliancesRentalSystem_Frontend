@@ -22,16 +22,45 @@ export class AdminorderComponent implements OnInit {
   statusId: number | undefined;
   selectedOrder: Order | null = null;
 
-  constructor(private adminOrderService: AdminOrderServiceService) {}
+  constructor(
+    private adminOrderService: AdminOrderServiceService,
+    private storageService: StorageService
+  ) {}
+
+  // Pagination variables
+  itemsPerPage = 3; // Number of items to display per page
+  currentPage = 1; // Current page
+  totalPages: number[] = []; // Array to hold total pages
+  displayedOrders: Order[] = []; // Subset of orders to display based on pagination
 
   ngOnInit(): void {}
+
+  calculateTotalPages() {
+    const totalOrders = this.orders.length;
+    const pages = Math.ceil(totalOrders / this.itemsPerPage);
+    this.totalPages = Array(pages)
+      .fill(0)
+      .map((x, i) => i + 1);
+    this.changePage(1); // Display first page initially
+  }
+
+  changePage(pageNumber: number) {
+    this.currentPage = pageNumber;
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.displayedOrders = this.orders.slice(startIndex, endIndex);
+  }
 
   getAllOrders() {
     this.adminOrderService.getAllOrders().subscribe((response: any) => {
       this.orders = response.data;
+      this.calculateTotalPages();
       console.log('ordered product-->', this.orders);
     });
   }
+
+  
+  
 
   // getAllOrders(userId: number) {
   //   this.adminOrderService.getAllOrders().subscribe({
@@ -93,4 +122,43 @@ export class AdminorderComponent implements OnInit {
   selectUserOrder(order: Order): void {
     this.selectedOrder = order;
   }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.changePage(this.currentPage - 1);
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages.length) {
+      this.changePage(this.currentPage + 1);
+    }
+  }
+
+  // onStatusChange(order: Order) {
+  //   console.log(order.orderStatus);
+  //   this.adminOrderService
+  //     .changeOrderStatus(order.id, order.orderStatus!)
+  //     .subscribe({
+  //       next: (response: any) => console.log(response.data),
+  //     });
+  // }
+
+  // onStatusChange(order: Order) {
+  //   // Assuming 'orderStatus' in Order model is a string
+  //   console.log(order.orderStatus);
+
+  //   // Modify the assignment according to your data structure
+  //   const statusString = order.orderStatus?.orderStatus; // Extracting the status string from OrderStatus object
+
+  //   if (statusString) {
+  //     this.adminOrderService
+  //       .changeOrderStatus(order.id, statusString)
+  //       .subscribe({
+  //         next: (response: any) => console.log(response.data),
+  //       });
+  //   }
+  // }
+
+  
 }

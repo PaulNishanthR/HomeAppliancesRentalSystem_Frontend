@@ -3,33 +3,54 @@
   <h2>All Orders</h2>
   <button class="btn bttn-bg" (click)="getAllOrders()">Get All Orders</button
   ><br /><br />
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Order Id</th>
-        <th scope="col">User ID</th>
-        <th scope="col">User Name</th>
-        <th scope="col">Product</th>
-        <th scope="col">Status</th>
-      </tr>
-    </thead>
-    <tbody id="table">
-      <tr *ngFor="let order of orders">
-        <td>{{ order.id }}</td>
-        <td>{{ order.userId }}</td>
-        <td>{{ order.username }}</td>
-        <td>
-          <ul>
-            <li *ngFor="let product of order.orderedProductList">
-              {{ product.title }}
-            </li>
-          </ul>
-        </td>
+  <ng-container *ngIf="displayedOrders && displayedOrders.length > 0">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Order Id</th>
+          <th scope="col">User ID</th>
+          <th scope="col">User Name</th>
+          <th scope="col">Product</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody id="table">
+        <tr *ngFor="let order of displayedOrders">
+          <td>{{ order.id }}</td>
+          <td>{{ order.userId }}</td>
+          <td>{{ order.username }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let product of order.orderedProductList">
+                {{ product.title }}
+              </li>
+            </ul>
+          </td>
 
-        <td>{{ order.orderStatus }}</td>
-      </tr>
-    </tbody>
-  </table>
+          <td>{{ order.orderStatus }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Pagination controls at the bottom -->
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <!-- Previous button -->
+        <li class="page-item">
+          <a class="page-link" (click)="previousPage()"><<</a>
+        </li>
+
+        <!-- Page numbers -->
+        <li class="page-item" *ngFor="let page of totalPages">
+          <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+        </li>
+
+        <!-- Next button -->
+        <li class="page-item">
+          <a class="page-link" (click)="nextPage()">>></a>
+        </li>
+      </ul>
+    </nav>
+  </ng-container>
 </div>
 
 <!-- Update Order Status -->

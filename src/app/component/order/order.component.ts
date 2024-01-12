@@ -3,6 +3,7 @@ import { AnimationOptions } from 'ngx-lottie';
 import { Subscription } from 'rxjs';
 import { AppResponse } from 'src/app/model/appResponse';
 import { Order } from 'src/app/model/order';
+import { Product } from 'src/app/model/product';
 import { OrderService } from 'src/app/service/order.service';
 import { StorageService } from 'src/app/service/storage.service';
 
@@ -12,9 +13,6 @@ import { StorageService } from 'src/app/service/storage.service';
   styleUrls: ['./order.component.css'],
 })
 export class OrderComponent implements OnInit {
-
- 
-
   constructor(
     private orderService: OrderService,
     private storageService: StorageService
@@ -27,6 +25,7 @@ export class OrderComponent implements OnInit {
     address: { id: 0, address: '', city: '', zipcode: 0 },
   };
   orderModel = this.INITIAL_ORDER;
+  orderedProductList: Product[] = [];
 
   ngOnInit(): void {
     let userId: any = this.storageService.getLoggedInUser().id;
@@ -38,6 +37,7 @@ export class OrderComponent implements OnInit {
       next: (response: AppResponse) => {
         if (response && response.data) {
           this.orders = response.data;
+          console.log('this is oreders-->', this.orders);
         } else {
           console.error('Invalid API response format:', response);
         }

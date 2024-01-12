@@ -11,6 +11,7 @@ import { AdmincategoryComponent } from './component/admin/admincategory/admincat
 import { UsersComponent } from './component/admin/users/users.component';
 import { AdminorderComponent } from './component/admin/adminorder/adminorder.component';
 import { AddressComponent } from './component/address/address.component';
+import { DashboardComponent } from './component/admin/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -38,6 +39,11 @@ const routes: Routes = [
   {
     path: 'adminorder',
     component: AdminorderComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
     canActivate: [authGuard],
   },
 ];
